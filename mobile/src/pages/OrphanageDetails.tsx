@@ -3,6 +3,7 @@ import { Image, View, ScrollView, Text, StyleSheet, Dimensions, TouchableOpacity
 import MapView, { Marker } from 'react-native-maps';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
+import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
 
 import mapMarkerImg from '../images/map-marker.png';
 import { RectButton } from 'react-native-gesture-handler';
@@ -42,11 +43,51 @@ export default function OrphanageDetails() {
   function handleOpenGoogleMapRoutes() {
     Linking.openURL(`https://www.google.com/maps/dir/?api=1&destination=${orphanage?.latitude},${orphanage?.longitude}`)
   }
-
+  
   if (!orphanage) {
     return (
       <View style={styles.container}>
-        <Text style={styles.description}>Carregando...</Text>
+        <ShimmerPlaceholder style={{...styles.imagesContainer, width: '100%'}}/>
+          
+        <View style={styles.detailsContainer}>
+          <ShimmerPlaceholder style={styles.title}/>
+          <ShimmerPlaceholder style={styles.description}/>
+
+          <View style={{...styles.mapContainer, borderWidth: 0}}>
+            <ShimmerPlaceholder style={styles.mapStyle}/>
+          </View>
+
+          <View style={styles.separator} />
+
+          <ShimmerPlaceholder style={styles.title}/>
+          <ShimmerPlaceholder style={styles.description}/>
+
+          <View style={styles.scheduleContainer}>
+            <View 
+              style={{
+                ...styles.scheduleItem, 
+                backgroundColor: '#EEE',
+                borderRadius: 20
+              }}
+            >
+              <Feather name="loader" size={40} color="#CCC" />
+              <ShimmerPlaceholder style={{...styles.scheduleText, width: '100%'}} />
+              <ShimmerPlaceholder style={{...styles.scheduleText, width: '100%'}} />
+            </View>
+
+            <View
+              style={{
+                ...styles.scheduleItem, 
+                backgroundColor: '#EEE',
+                borderRadius: 20
+              }}
+            >
+              <Feather name="loader" size={40} color="#CCC" />
+              <ShimmerPlaceholder style={{...styles.scheduleText, width: '100%'}} />
+              <ShimmerPlaceholder style={{...styles.scheduleText, width: '100%'}} />
+            </View>
+          </View>
+        </View>
       </View>
     );
   }
